@@ -1,10 +1,26 @@
-/*
-Copyright (c) 2015, Dust Networks. All rights reserved.
-
-Port of Zephyr for the AIOT Play.
-
-\license See attached DN_LICENSE.txt.
-*/
+/*H**********************************************************************
+* FILENAME :        dn_uart.c
+*
+* DESCRIPTION :
+*       Port of the sm_clib to Zephyr for the use on the
+*       AIOT Board.
+*
+* LICENSE:
+*       See attached DN_LICENSE.txt.
+*
+* NOTES :
+*       This application is part of the OpenSwarm Project.
+*
+*       Copyright Siemens AG.  All rights reserved.
+*
+* AUTHOR :    Fabian Graf       START DATE :    26 Sep 2023
+*
+* CHANGES :
+*
+* VERSION DATE    WHO     DETAIL
+* 0       26Sep23 FG      Initial Commit
+*
+*H*/
 
 #include "../../dn_uart.h"
 #include <zephyr/kernel.h>
@@ -34,7 +50,7 @@ static const struct device *const uart_dev1 = DEVICE_DT_GET(DT_NODELABEL(arduino
 
 //=========================== interrupt handlers ==============================
 
-void isr_handler_uart0(){
+void isr_handler_uart1(){
    if (!uart_irq_update(uart_dev1)) {
       return;
    }
@@ -52,10 +68,10 @@ void dn_uart_init(dn_uart_rxByte_cbt rxByte_cb){
    // call back function
    dn_uart_vars.ipmt_uart_rxByte_cb = rxByte_cb;
    // Define ISR for reception
-   uart_irq_callback_user_data_set(uart_dev1, isr_handler_uart0, NULL);
+   uart_irq_callback_user_data_set(uart_dev1, isr_handler_uart1, NULL);
    uart_irq_rx_enable(uart_dev1);
    if (device_is_ready(uart_dev1)) {
-      printk("UART0 device ready!\n");
+      printk("UART1 device ready!\n");
    }
 
 }
