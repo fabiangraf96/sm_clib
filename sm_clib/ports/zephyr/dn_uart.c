@@ -1,26 +1,28 @@
-/*H**********************************************************************
-* FILENAME :        dn_uart.c
+/*H***********************************************************************
+* FILENAME :        uart.c
 *
 * DESCRIPTION :
-*       Port of the sm_clib to Zephyr for the use on the
-*       AIOT Board.
+* Port of the UART Module to be used in Zephyr.
 *
-* LICENSE:
-*       See attached DN_LICENSE.txt.
+* LICENSE AND COPYRIGHT:
+* SPDX-FileCopyrightText: (c) 2023 Siemens AG
+* SPDX-License-Identifier: BSD-3-Clause
+* 
+* Parts are copied from:
+* - sm_clib - Dust Networks - https://github.com/dustcloud/sm_clib
 *
 * NOTES :
-*       This application is part of the OpenSwarm Project.
+* This application is part of the OpenSwarm Project.
 *
-*       Copyright Siemens AG.  All rights reserved.
-*
-* AUTHOR :    Fabian Graf       START DATE :    26 Sep 2023
+* AUTHOR :
+* Fabian Graf - fabian.graf@siemens.com
 *
 * CHANGES :
-*
 * VERSION DATE    WHO     DETAIL
 * 0       26Sep23 FG      Initial Commit
+* 1       18Oct23 FG      Use UART1 instead of UART0
 *
-*H*/
+*H***********************************************************************/
 
 #include "../../dn_uart.h"
 #include <zephyr/kernel.h>
