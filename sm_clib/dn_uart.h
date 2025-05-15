@@ -8,6 +8,8 @@ Copyright (c) 2014, Dust Networks. All rights reserved.
 #define DN_UART_H
 
 #include "dn_common.h"
+#include <zephyr/sys/ring_buffer.h>
+
 
 //=========================== defined =========================================
 
@@ -16,6 +18,8 @@ Copyright (c) 2014, Dust Networks. All rights reserved.
 typedef void (*dn_uart_rxByte_cbt)(uint8_t byte);
 
 //=========================== variables =======================================
+
+extern struct ring_buf uart_rx_ringbuf;
 
 //=========================== prototypes ======================================
 
@@ -26,6 +30,7 @@ typedef void (*dn_uart_rxByte_cbt)(uint8_t byte);
 void dn_uart_init(dn_uart_rxByte_cbt rxByte_cb);
 void dn_uart_txByte(uint8_t byte);
 void dn_uart_txFlush();
+void dn_uart_rx_thread();
 
 #ifdef __cplusplus
 }

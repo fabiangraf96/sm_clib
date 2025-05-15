@@ -136,7 +136,7 @@ dn_err_t dn_serial_sendRequestNoCheck(uint8_t cmdId, bool isAck, bool shouldBeAc
       dn_hdlc_outputWrite(payload[i]);
    }
    dn_hdlc_outputClose();
-   
+
    // increment the txPacketId
    dn_serial_mg_vars.txPacketId++;
    
