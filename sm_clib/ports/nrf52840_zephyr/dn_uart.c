@@ -2,7 +2,7 @@
 * FILENAME :        uart.c
 *
 * DESCRIPTION :
-* Port of the UART Module to be used in Zephyr on the MAX78000.
+* Port of the UART Module to be used in Zephyr on the nRF52840DK.
 *
 * LICENSE AND COPYRIGHT:
 * SPDX-FileCopyrightText: (c) 2025 Siemens AG
@@ -19,7 +19,7 @@
 *
 * CHANGES :
 * VERSION DATE    WHO     DETAIL
-* 0       14May25 FG      Initial Commit
+* 0       28May25 FG      Initial Commit
 *
 *H***********************************************************************/
 
@@ -50,7 +50,7 @@ dn_uart_vars_t dn_uart_vars;
 uint8_t rxBuf[32];
 int bytes_read;
 
-static const struct device *const uart_dev = DEVICE_DT_GET(DT_NODELABEL(uart2));
+static const struct device *const uart_dev = DEVICE_DT_GET(DT_NODELABEL(uart1));
 
 RING_BUF_DECLARE(uart_rx_ringbuf, RING_BUF_SIZE);
 
@@ -59,7 +59,7 @@ RING_BUF_DECLARE(uart_rx_ringbuf, RING_BUF_SIZE);
 
 //=========================== interrupt handlers ==============================
 
-void isr_handler_uart2(){
+void isr_handler_uart(){
    if (!uart_irq_update(uart_dev)) {
 		return;
 	}
@@ -81,7 +81,7 @@ void dn_uart_init(dn_uart_rxByte_cbt rxByte_cb){
    // call back function
    dn_uart_vars.ipmt_uart_rxByte_cb = rxByte_cb;
    // Define ISR for reception
-   uart_irq_callback_user_data_set(uart_dev, isr_handler_uart2, NULL);
+   uart_irq_callback_user_data_set(uart_dev, isr_handler_uart, NULL);
    
    if (device_is_ready(uart_dev)) {
       printk("UART device ready!\n");
@@ -116,7 +116,7 @@ void dn_uart_rx_thread(void)
                 dn_uart_vars.ipmt_uart_rxByte_cb(buf[i]);
             }
         } else {
-            k_sleep(K_MSEC(5));
+            //k_sleep(K_MSEC(5));
         }
     }
 }
