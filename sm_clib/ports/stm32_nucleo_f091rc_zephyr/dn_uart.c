@@ -2,7 +2,7 @@
 * FILENAME :        uart.c
 *
 * DESCRIPTION :
-* Port of the UART Module to be used in Zephyr on the MAX78000.
+* Port of the UART Module to be used in Zephyr on the STM32 Nucelo F091RC.
 *
 * LICENSE AND COPYRIGHT:
 * SPDX-FileCopyrightText: (c) 2025 Siemens AG
@@ -19,7 +19,7 @@
 *
 * CHANGES :
 * VERSION DATE    WHO     DETAIL
-* 0       14May25 FG      Initial Commit
+* 0       03Jun25 FG      Initial Commit
 *
 *H***********************************************************************/
 
@@ -50,7 +50,7 @@ dn_uart_vars_t dn_uart_vars;
 uint8_t rxBuf[32];
 int bytes_read;
 
-static const struct device *const uart_dev = DEVICE_DT_GET(DT_NODELABEL(uart2));
+static const struct device *const uart_dev = DEVICE_DT_GET(DT_NODELABEL(usart1));
 
 RING_BUF_DECLARE(uart_rx_ringbuf, RING_BUF_SIZE);
 
