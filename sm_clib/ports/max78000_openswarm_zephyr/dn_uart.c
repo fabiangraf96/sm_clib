@@ -60,7 +60,7 @@ RING_BUF_DECLARE(uart_rx_ringbuf, RING_BUF_SIZE);
 
 //=========================== interrupt handlers ==============================
 
-void isr_handler_uart2(){
+void isr_handler_uart0(){
    if (!uart_irq_update(uart_dev)) {
 		return;
 	}
@@ -82,7 +82,7 @@ void dn_uart_init(dn_uart_rxByte_cbt rxByte_cb){
    // call back function
    dn_uart_vars.ipmt_uart_rxByte_cb = rxByte_cb;
    // Define ISR for reception
-   uart_irq_callback_user_data_set(uart_dev, isr_handler_uart2, NULL);
+   uart_irq_callback_user_data_set(uart_dev, isr_handler_uart0, NULL);
    
    if (device_is_ready(uart_dev)) {
       printk("UART device ready!\n");
