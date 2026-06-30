@@ -61,9 +61,7 @@ RING_BUF_DECLARE(uart_rx_ringbuf, RING_BUF_SIZE);
 //=========================== interrupt handlers ==============================
 
 void isr_handler_uart0(){
-   if (!uart_irq_update(uart_dev)) {
-		return;
-	}
+   uart_irq_update(uart_dev);
 
    if (uart_irq_rx_ready(uart_dev)) {
       while ((bytes_read = uart_fifo_read(uart_dev, rxBuf, sizeof(rxBuf))) > 0) {
